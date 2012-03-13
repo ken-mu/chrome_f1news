@@ -1,0 +1,36 @@
+{
+  "name": "Current Topics of F1",
+  "version": "1.0",
+  "description": "The first extension that I made.",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+		"popup": "views/popup.html"
+  },
+  "permissions": [
+		"http://www.autosport.com/rss/f1news.xml",
+		"http://www.formula1.com/rss/news/latest.rss",
+		"http://www.grandprix.com/rss.xml",
+		"http://www.grandprix.com/ft/rss.xml",
+		"http://en.espnf1.com/rss/motorsport/story/feeds/29951.xml?type=2",
+		"http://feeds.gpupdate.net/en/rss.xml",
+		"http://uk.eurosport.yahoo.com//formula-1/index.html.xml",
+		"http://de.eurosport.yahoo.com//formel-1/index.html.xml",
+		"http://www.gazzetta.it/rss/Formula1.xml",
+		"http://feeds.gpupdate.net/it/rss.xml",
+		"http://it.eurosport.yahoo.com//formula-1/index.html.xml",
+		"http://espndeportes-assets.espn.go.com/rss/news?section=section.DeporteMotor&name=deporte-motor",
+		"http://feeds.gpupdate.net/es/rss.xml",
+		"http://feeds.gpupdate.net/nl/rss.xml",
+		"http://www.eurosport.ru/formula-1/rss-flash.xml",
+		"http://www.eurosport.pl/formula-1/rss-flash.xml",
+		"http://www.eurosport.se/formel-1/rss-flash.xml",
+		"http://tr.eurosport.com/formula-1/rss-flash.xml",
+		"http://au.eurosport.com/formula1/rss.xml",
+		"http://ja.espnf1.com/rss/motorsport/story/feeds/0.xml?type=2",
+		"http://feeds.gpupdate.net/ja/rss.xml",
+		"http://f1-gate.com/rss2.xml",
+		"http://eurosport.qq.com/formula1/rss-flash.xml"
+  ],
+	"options_page": "views/options.html"
+}
+

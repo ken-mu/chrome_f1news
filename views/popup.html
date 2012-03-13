@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>F1 RSS</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link href="/css/feed.css" type="text/css" rel="stylesheet" />
+		<script src="/javascript/utils.js" type="text/javascript"></script>
+		<script src="/javascript/feed.js" type="text/javascript"></script>
+	</head>
+	<body onload="main()">
+		<div id="header">
+			<header>
+				<div id="app_title">
+					<strong>Current Topics of F1</strong>
+				</div>
+				<div id="app_navi">
+					<a onclick="chrome.tabs.create({url: 'views/options.html', selected: true})">Options</a>
+						| 
+					<a onclick="main()">ReLoad</a>
+				</div>
+			</header>
+		</div>
+		<div id="loading">
+			<img src="/images/ajax-loader.gif"/>
+		</div>
+		<div id="httpstatus">
+		</div>
+		<div id="feed">
+		</div>
+	</body>
+</html>

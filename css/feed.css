@@ -1,0 +1,65 @@
+body {
+	width: 400px;
+	font-size: 12px;
+	overflow-x: hidden;
+}
+
+#header {
+	margin-bottom: 10px;
+	border-bottom: 1px solid #444;
+	padding-bottom: 8px;
+}
+
+.item {
+	margin: 0 0 10px 20px;
+}
+
+.title {
+	margin-bottom: 3px;
+}
+
+.title a {
+	color: #12C;
+}
+
+.title a:visited {
+	color: #12C;
+}
+
+.source a {
+	color: green;
+}
+
+.source a:visited {
+	color: green;
+}
+
+a {
+	cursor: pointer;
+	color: #15C;
+	text-decoration: underline;
+}
+
+header {
+	height: 20px;
+}
+
+#app_title {
+	font-family: 'GothicCustom', 'Arial Narrow';
+	float: left;
+	font-size: 18px;
+	padding: 5px 0 0 2px;
+}
+
+#app_navi {
+	float: left;
+	padding: 12px 0 0 150px;
+}
+
+#loading {
+	text-align: center;
+}
+
+#httpstatus {
+	text-align: center;
+}

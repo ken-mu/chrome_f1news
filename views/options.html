@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script src = "/javascript/utils.js"></script>
+    <script src = "/javascript/options.js"></script>
+    <meta http-equiv = "Content-Type" content = "text/html; charset = UTF-8">
+    <link rel = "stylesheet" href = "/css/options.css"/>
+	</head>
+	<body onload="init()">
+		<div id="options_container">
+			<div id="header">
+				<header>
+					Current Topix of F1 Options
+				</header>
+			</div>
+			<div id="max_row_container" class="option_container">
+				<div id="max_row_name" class="options_name">
+					<strong>Maximum page size:</strong>
+				</div>
+				<select id="row" style="width: 50px;" onchange="manageRowSelection();">
+					<option value="10">10</option>
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option value="40">40</option>
+					<option value="50">50</option>
+				</select>
+			</div>
+			<div id="select_news_container" class="option_container">
+				<div id="row_news">
+					<div id="row_news_name" class="options_name">
+						<strong>Select News:</strong>
+					</div>
+
+					<!--英語-->
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://www.autosport.com/rss/f1news.xml" id="autosport" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							AUTOSPORT
+						</div>
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://www.formula1.com/rss/news/latest.rss" id="formula1" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Formula1.com
+						</div>
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://www.grandprix.com/rss.xml" id="grandprix_news" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Grandprix.com Current News
+						</div>
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://www.grandprix.com/ft/rss.xml" id="grandprix_fetures" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Grandprix.com Current Features
+						</div>
+					</div>
+
+					<!--ヨーロッパ-->
+					<!--イギリス-->
+					<div>
+						<img src="/images/United-Kindom.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://en.espnf1.com/rss/motorsport/story/feeds/0.xml?type=2" id="espn_uk" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							ESPNF1.com UK
+						</div>
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://feeds.gpupdate.net/en/rss.xml" id="gpupdate_uk" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							GPUpdate.net UK
+						</div>
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://uk.eurosport.yahoo.com//formula-1/index.html.xml" id="eurosport_uk" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Yahoo! Eurosport UK
+						</div>
+					</div>
+
+					<!--ドイツ-->
+					<div>
+						<img src="/images/Germany.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://de.eurosport.yahoo.com//formel-1/index.html.xml" id="eurosport_de" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Yahoo! Eurosport DE
+						</div>
+					</div>
+	
+					<!--イタリア-->
+					<div>
+						<img src="/images/Italy.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://www.gazzetta.it/rss/Formula1.xml" id="gazzetta" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Gazzetta.it
+						</div>
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://feeds.gpupdate.net/it/rss.xml" id="gpupdate_it" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							GPUpdate.net IT
+						</div>
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://it.eurosport.yahoo.com//formula-1/index.html.xml" id="eurosport_it" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Yahoo! Eurosport IT
+						</div>
+					</div>
+
+					<!--スペイン-->
+					<div>
+						<img src="/images/Spain.png" />
+					</div>
+					<!--
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://espndeportes-assets.espn.go.com/rss/news?section=section.DeporteMotor&name=deporte-motor" id="espn_es" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							ESPNF1.com ES
+						</div>
+					</div>
+					-->
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://feeds.gpupdate.net/es/rss.xml" id="gpupdate_es" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							GPUpdate.net ES
+						</div>
+					</div>
+
+					<!--オランダ-->
+					<div>
+						<img src="/images/Netherlands.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://feeds.gpupdate.net/nl/rss.xml" id="eurosport_nl" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							GPUpdated.net NL
+						</div>
+					</div>
+
+
+					<!--ロシア-->
+					<div>
+						<img src="/images/Russia.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://www.eurosport.ru/formula-1/rss-flash.xml" id="eurosport_ru" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Yahoo! Eurosport RU
+						</div>
+					</div>
+
+					<!--ポーランド-->
+					<div>
+						<img src="/images/Poland.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://www.eurosport.pl/formula-1/rss-flash.xml" id="eurosport_pl" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Yahoo! Eurosport PL
+						</div>
+					</div>
+
+					<!--スウェーデン-->
+					<div>
+						<img src="/images/Sweden.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://www.eurosport.se/formel-1/rss-flash.xml" id="eurosport_se" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Yahoo! Eurosport SE
+						</div>
+					</div>
+
+					<!--トルコ-->
+					<div>
+						<img src="/images/Turkey.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://tr.eurosport.com/formula-1/rss-flash.xml" id="eurosport_tr" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Yahoo! Eurosport TR
+						</div>
+					</div>
+
+					<!--オセアニア-->
+					<!--オーストラリア-->
+					<div>
+						<img src="/images/Australia.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://au.eurosport.com/formula1/rss.xml" id="eurosport_au" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Eurosport AU
+						</div>
+					</div>
+
+					<!--アジア-->
+					<!--日本-->
+					<div>
+						<img src="/images/Japan.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://ja.espnf1.com/rss/motorsport/story/feeds/0.xml?type=2" id="espn_ja" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							ESPNF1.com
+						</div>
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://feeds.gpupdate.net/ja/rss.xml" id="gpupdate_ja" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							GPUpdate.net
+						</div>
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://f1-gate.com/rss2.xml" id="f1gate" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							F1-Gate.com
+						</div>
+					</div>
+
+					<!--中国-->
+					<div>
+						<img src="/images/China.png" />
+					</div>
+					<div class="news">
+						<div class="news_checkbox_container">
+							<input class="news_checkbox" type="checkbox" value="http://eurosport.qq.com/formula1/rss-flash.xml" id="eurosport_qq" onchange="manageCheckCount(this.id)">
+						</div>
+						<div class="news_site_container">
+							Eurosport QQ
+						</div>
+					</div>
+
+
+
+
+
+				</div>
+			</div>
+			<div id="save">
+				<button id="save_button" disabled="disabled" type="button" onclick="saveOptions()">Save</button>
+				<div id="save_succeed" class="disp_non">Options saved.</div>
+			</div>
+		</div>
+		<div id="footer">
+			<footer>
+			</footer>
+		</div>
+	</body>
+</html>
