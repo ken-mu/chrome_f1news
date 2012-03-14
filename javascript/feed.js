@@ -2,7 +2,7 @@ var reqs;
 var row = 0;
 var feedURLs = {};
 var requestCompletedCount = 0;
-var feeds = new Array();
+var feeds;
 var isConnected = true;
 
 // id="news"‚ÌƒGƒŒƒƒ“ƒg”z—ñ
@@ -201,6 +201,7 @@ function showFeeds() {
 }
 
 function init() {
+	feeds = new Array();
 	$('loading').style.display = "";
 	requestCompletedCount = 0;
 	clearFeed();
@@ -214,4 +215,5 @@ function clearFeed() {
 
 function handleResponse() {
 }
+
 

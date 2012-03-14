@@ -2,14 +2,16 @@ var checkCount = 0;
 var defaultCheckCount = 0;
 var defaultRowValue = 0;
 var defaultcheckedList;
-var newsIDArr = new Array();
+var newsIDArr;
+var timer = getCheckStatusInterval(5000);
 
 function init() {
+	newsIDArr = makeNewsIDArr();
 	setRowSelection();
 	setNewsCheckBoxs();
 	setDefaultRowValue();
 	//setDefaultNewsSelect();
-	makeNewsIDArr();
+	//makeNewsIDArr();
 }
 
 function setRowSelection() {
@@ -71,6 +73,7 @@ function disableSaveButton() {
 }
 
 function manageRowSelection() {
+	timer = getCheckStatusInterval(5000);
 	if(checkCount > 0 && defaultRowValue != $('row').value) {
 		//enableSaveButton();
 		//変更
@@ -82,7 +85,7 @@ function manageRowSelection() {
 }
 
 function manageCheckCount(id) {
-
+	timer = getCheckStatusInterval(5000);
 	if($(id).checked) {
 		checkCount++;
 	} else {
@@ -100,14 +103,17 @@ function manageCheckCount(id) {
 }
 
 function isSameStateAsDefault() {
+	/*
 	var newsMap = {};
 	var newslist = document.getElementsByClassName('news_checkbox');
 	for(var i=0; i<newslist.length; i++) {
 		newsMap[newslist[i].id] = newslist[i].checked;
 	}
+	*/
+	var newsCheckedMap = getNewsCheckedMap();
 
 	for(var i=0; i<defaultcheckedList.length; i++) {
-		if(newsMap[defaultcheckedList[i]] == false) {
+		if(newsCheckedMap[defaultcheckedList[i]] == false) {
 			return false;
 		}
 	}
@@ -117,9 +123,14 @@ function isSameStateAsDefault() {
 function saveOptions() {
 	saveRowSelection();
 	saveNewsCheckBoxs();
+	clearInterval(timer);
 	//変更
 	//disableSaveButton();
 	//displaySaveSuccessMessage();
+}
+
+function getCheckStatusInterval(time) {
+	return setInterval("checkStatus()", time);
 }
 
 function saveRowSelection() {
@@ -142,8 +153,12 @@ function saveNewsCheckBoxs() {
 }
 
 function makeNewsIDArr() {
-	var newslist = document.getElementsByClassName('news_checkbox');
-	
+	var newsarr = document.getElementsByClassName('news_checkbox');
+	var arr = new Array(newsarr.length);
+	for(var i=0; i<newsarr.length; i++) {
+		arr[i] = newsarr[i].id;
+	}
+	return arr;
 }
 
 function displaySaveSuccessMessage() {
@@ -154,3 +169,47 @@ function hideSaveSuccessMessage() {
 	$('save_succeed').className='disp_non';
 }
 
+/**
+ * ストレージのXMLとオプションページの設定を比較。
+ * 設定が異なれば、オプションページの状態を、XMLの状態に合わせて再設定する。
+ */
+function checkStatus() {
+	if(! isSameRowValueAsJson() ) {
+		$('row').value = getJsonValue('row')
+	}
+
+	if(! isSameCheckBoxStatusAsJson() ) {
+		resetAllNewsCheckBox();
+		setNewsCheckBoxs();
+	}
+}
+
+function resetAllNewsCheckBox() {
+	for(var i=0; i<newsIDArr.length; i++) {
+		$(newsIDArr[i]).checked = false;
+	}
+}
+
+function isSameRowValueAsJson() {
+	return $('row').value == getJsonValue('row');
+}
+
+function getNewsCheckedMap() {
+	var newsMap = {};
+	var newslist = document.getElementsByClassName('news_checkbox');
+	for(var i=0; i<newslist.length; i++) {
+		newsMap[newslist[i].id] = newslist[i].checked;
+	}
+	return newsMap;
+}
+
+function isSameCheckBoxStatusAsJson() {
+	var newsCheckedMap = getNewsCheckedMap();
+	var newsarr = getJsonValue('news');
+	for(var i=0; i<newsarr.length; i++) {
+		if(newsCheckedMap[newsarr[i]['id']] == false) {
+			return false;
+		}
+	}
+	return checkCount == newsarr.length;
+}
