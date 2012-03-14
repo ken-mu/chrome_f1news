@@ -72,9 +72,12 @@ function disableSaveButton() {
 
 function manageRowSelection() {
 	if(checkCount > 0 && defaultRowValue != $('row').value) {
-		enableSaveButton();
+		//enableSaveButton();
+		//ïœçX
+		saveOptions();
 	} else {
-		disableSaveButton();
+		//disableSaveButton();
+		return;
 	}
 }
 
@@ -87,9 +90,12 @@ function manageCheckCount(id) {
 	}
 
 	if(checkCount == 0 || isSameStateAsDefault()) {
-		disableSaveButton();
+		//ïœçX
+		//disableSaveButton();
+		return;
 	} else {
-		enableSaveButton();
+		//enableSaveButton();
+		saveOptions();
 	}
 }
 
@@ -111,8 +117,9 @@ function isSameStateAsDefault() {
 function saveOptions() {
 	saveRowSelection();
 	saveNewsCheckBoxs();
-	disableSaveButton();
-	displaySaveSuccessMessage();
+	//ïœçX
+	//disableSaveButton();
+	//displaySaveSuccessMessage();
 }
 
 function saveRowSelection() {
