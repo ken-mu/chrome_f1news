@@ -11,6 +11,7 @@
     "default_icon": "images/icon.png",
 		"popup": "views/popup.html"
   },
+	"offline_enabled": false,
   "permissions": [
 		"http://www.autosport.com/rss/f1news.xml",
 		"http://www.formula1.com/rss/news/latest.rss",
