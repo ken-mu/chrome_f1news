@@ -1,12 +1,12 @@
-var checkCount = 0;
-var defaultCheckCount = 0;
+var checkcount = 0;
+var defaultcheckcount = 0;
 var defaultRowValue = 0;
-var defaultcheckedList;
-var newsIDArr;
+var defaultcheckedarr;
+var newsidarr;
 var timer = getCheckStatusInterval(5000);
 
 function init() {
-	newsIDArr = makeNewsIDArr();
+	newsidarr = makeNewsIDArr();
 	setRowSelection();
 	setNewsCheckBoxs();
 	setDefaultRowValue();
@@ -18,30 +18,24 @@ function setRowSelection() {
 	$('row').value = getJsonValue('row');
 }
 
-/**
- * 
- */
 function setNewsCheckBoxs() {
 	var newsarr = getJsonValue('news');
-	defaultcheckedList = new Array();
+	defaultcheckedarr = new Array();
 	if(newsarr) {
 		for(var i=0; i<newsarr.length; i++) {
 			$(newsarr[i]['id']).checked = true;
-			//defaultcheckedList[i] = newsarr[i]['id'];
+			//defaultcheckedarr[i] = newsarr[i]['id'];
 			setDefaultNewsSelect(newsarr[i]['id']);
 		}
-		checkCount = newsarr.length;
-		defaultCheckCount = newsarr.length;
+		checkcount = newsarr.length;
+		defaultcheckcount = newsarr.length;
 	} else {
 		defaultNewsSelect();
-		checkCount = 2;
-		defaultCheckCount = 2;
+		checkcount = 2;
+		defaultcheckcount = 2;
 	}
 }
 
-/**
- * デフォルトはAUTOSPORTとFormula1.comを選択
- */
 function defaultNewsSelect() {
 	saveRowSelection();
 	$('autosport').checked = true;
@@ -50,13 +44,7 @@ function defaultNewsSelect() {
 }
 
 function setDefaultNewsSelect(id) {
-	/*
-	var newslist = document.getElementsByClassName('news_checkbox');
-	for(var i in newslist) {
-		defaultcheckedList.push(newslist[i]['id']);
-	}
-	*/
-	defaultcheckedList.push(id);
+	defaultcheckedarr.push(id);
 }
 
 function setDefaultRowValue() {
@@ -74,9 +62,8 @@ function disableSaveButton() {
 
 function manageRowSelection() {
 	timer = getCheckStatusInterval(5000);
-	if(checkCount > 0 && defaultRowValue != $('row').value) {
+	if(checkcount > 0 && defaultRowValue != $('row').value) {
 		//enableSaveButton();
-		//変更
 		saveOptions();
 	} else {
 		//disableSaveButton();
@@ -87,13 +74,12 @@ function manageRowSelection() {
 function manageCheckCount(id) {
 	timer = getCheckStatusInterval(5000);
 	if($(id).checked) {
-		checkCount++;
+		checkcount++;
 	} else {
-		checkCount--;
+		checkcount--;
 	}
 
-	if(checkCount == 0 || isSameStateAsDefault()) {
-		//変更
+	if(checkcount == 0 || isSameStateAsDefault()) {
 		//disableSaveButton();
 		return;
 	} else {
@@ -110,21 +96,20 @@ function isSameStateAsDefault() {
 		newsMap[newslist[i].id] = newslist[i].checked;
 	}
 	*/
-	var newsCheckedMap = getNewsCheckedMap();
+	var newscheckedmap = getNewsCheckedMap();
 
-	for(var i=0; i<defaultcheckedList.length; i++) {
-		if(newsCheckedMap[defaultcheckedList[i]] == false) {
+	for(var i=0; i<defaultcheckedarr.length; i++) {
+		if(newscheckedmap[defaultcheckedarr[i]] == false) {
 			return false;
 		}
 	}
-	return checkCount == defaultCheckCount;
+	return checkcount == defaultcheckcount;
 }
 
 function saveOptions() {
 	saveRowSelection();
 	saveNewsCheckBoxs();
 	clearInterval(timer);
-	//変更
 	//disableSaveButton();
 	//displaySaveSuccessMessage();
 }
@@ -148,7 +133,7 @@ function saveNewsCheckBoxs() {
 			defaultcheckedlist.push(newslist[i].id);
 		}
 	}
-	defaultCheckCount = newsarr.length;
+	defaultcheckcount = newsarr.length;
 	setJsonKeyValue('news', JSON.stringify(newsarr));
 }
 
@@ -185,8 +170,8 @@ function checkStatus() {
 }
 
 function resetAllNewsCheckBox() {
-	for(var i=0; i<newsIDArr.length; i++) {
-		$(newsIDArr[i]).checked = false;
+	for(var i=0; i<newsidarr.length; i++) {
+		$(newsidarr[i]).checked = false;
 	}
 }
 
@@ -211,5 +196,5 @@ function isSameCheckBoxStatusAsJson() {
 			return false;
 		}
 	}
-	return checkCount == newsarr.length;
+	return checkcount == newsarr.length;
 }

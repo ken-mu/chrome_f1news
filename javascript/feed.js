@@ -4,8 +4,6 @@ var feedURLs = {};
 var requestCompletedCount = 0;
 var feeds;
 var isConnected = true;
-
-// id="news"のエレメント配列
 var newsarr;
 
 
@@ -15,10 +13,6 @@ function main() {
 	defineRequests();
 }
 
-/**
- * 複数のフィードを取得する。
- * 
- */
 function makeFeedURLs() {
 	if(! newsarr) {
 		newsarr = [{id: 'autosport', value: 'http://www.autosport.com/rss/f1news.xml'},
@@ -29,9 +23,6 @@ function makeFeedURLs() {
 	}
 }
 
-/**
- * すべてのフィードに対する解析が完了したら、データを取得。
- */
 function defineRequests() {
 	reqs = new Array(newsarr.length);
 	for(var i in feedURLs) {
@@ -41,15 +32,14 @@ function defineRequests() {
 }
 
 /**
- * 時間軸でフィードをソートする。
- * 時間軸の形式は<pubDate>Www, d{1,2} Mmm yyyy hh:mm:ss [GMT|+dddd]</pubDate>
- * 以下の順に調べる。
- * 1. 年(yyyy)
- * 2. 月(Mmm)
- * 3. 日(dd)
- * 4. 時(hh)
- * 5. 分(mm)
- * 6. 秒(ss)
+ * Sort feeds into chronogical order.
+ * Form is: <pubDate>Www, d{1,2} Mmm yyyy hh:mm:ss [GMT|+dddd]</pubDate>
+ * 1. Year(yyyy)
+ * 2. Month(Mmm)
+ * 3. Date(dd)
+ * 4. Hour(hh)
+ * 5. Minute(mm)
+ * 6. Second(ss)
  */
 function sortFeeds() {
 	feeds.sort(function(feed1, feed2) {
@@ -102,11 +92,6 @@ function defineRequest(req, feedURL) {
 	req.open('GET', feedURL, true);
 	req.onload = handleResponse();
 	req.onreadystatechange = function() {
-		/**
-		 * reqのフィードの読み込みが完了したら、
-		 * 各フィードのタグを抽出し、
-		 * 全フィードの読み込みが完了したら、時間軸でソートする。
-		 */
 		if(req.readyState == 4) {
 			requestCompletedCount++;
 			
@@ -114,7 +99,7 @@ function defineRequest(req, feedURL) {
 				$('loading').style.display = 'none';
 				return;
 			}
-			checkHttpStatusCode(req);
+			checkHttpStatusCode(req, feedURL);
 	
 			if(requestCompletedCount == reqs.length) {
 				sortFeeds();
@@ -126,14 +111,20 @@ function defineRequest(req, feedURL) {
 	req.send(null);
 }
 
-function checkHttpStatusCode(req) {
+function checkHttpStatusCode(req, feedURL) {
 	if(req.status == 200) {
 		makeFeed(req);
 	} else if(req.status == 404) {
-		showHttpStatusMessage('Not found.');
+		showHttpStatusMessage(feedURL + ': Not Found.');
 	} else if(req.status == 0) {
 		showHttpStatusMessage('Not connected.');
 		isConnected = false;
+	} else if(req.status == 400) {
+		showHttpStatusMessage(feedURL + ': Bad Request.');
+	} else if(req.status == 403) {
+		showHttpStatusMessage(feedURL + ': Forbidden.');
+	} else if(req.status == 503) {
+		showHttpStatusMessage(feedURL + ': Service Unavailable.');
 	}
 }
 
