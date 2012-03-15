@@ -1,6 +1,6 @@
 {
   "name": "Current Topics of F1",
-  "version": "1.1",
+  "version": "1.2",
   "description": "Display F1 news around the world. You can specify news on options.",
   "icons": {
 	 "16": "images/icon16.png",
