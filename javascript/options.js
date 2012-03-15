@@ -89,13 +89,6 @@ function manageCheckCount(id) {
 }
 
 function isSameStateAsDefault() {
-	/*
-	var newsMap = {};
-	var newslist = document.getElementsByClassName('news_checkbox');
-	for(var i=0; i<newslist.length; i++) {
-		newsMap[newslist[i].id] = newslist[i].checked;
-	}
-	*/
 	var newscheckedmap = getNewsCheckedMap();
 
 	for(var i=0; i<defaultcheckedarr.length; i++) {
@@ -155,8 +148,8 @@ function hideSaveSuccessMessage() {
 }
 
 /**
- * ストレージのXMLとオプションページの設定を比較。
- * 設定が異なれば、オプションページの状態を、XMLの状態に合わせて再設定する。
+ * Compare setting on the Json and setting on the option page.。
+ * If settings are equal, reset options according to Json.。
  */
 function checkStatus() {
 	if(! isSameRowValueAsJson() ) {
@@ -180,12 +173,12 @@ function isSameRowValueAsJson() {
 }
 
 function getNewsCheckedMap() {
-	var newsMap = {};
+	var newsmap = {};
 	var newslist = document.getElementsByClassName('news_checkbox');
 	for(var i=0; i<newslist.length; i++) {
-		newsMap[newslist[i].id] = newslist[i].checked;
+		newsmap[newslist[i].id] = newslist[i].checked;
 	}
-	return newsMap;
+	return newsmap;
 }
 
 function isSameCheckBoxStatusAsJson() {
